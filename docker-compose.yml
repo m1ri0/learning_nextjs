@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15.3-alpine
+    container_name: nextjs-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nextjs-dashboard-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - nextjs_db_data:/var/lib/postgresql/data
+
+volumes:
+  nextjs_db_data:
