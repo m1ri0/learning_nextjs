@@ -1,6 +1,7 @@
 services:
   db:
-    image: postgres:15.3-alpine
+    build:
+      context: ./docker/postgres
     container_name: nextjs-db
     restart: on-failure
     environment:
@@ -11,6 +12,8 @@ services:
       - "5432:5432"
     volumes:
       - nextjs_db_data:/var/lib/postgresql/data
+      - ./server.crt:/run/postgresql-certs/server.crt:ro
+      - ./server.key:/run/postgresql-certs/server.key:ro
 
 volumes:
   nextjs_db_data:
